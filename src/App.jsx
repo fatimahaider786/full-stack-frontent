@@ -15,7 +15,7 @@ function App() {
         <Route path="/sign-up" element={<Register />} />
         <Route path="/products" element={<Products />} />
         <Route path="/create" element={<CreateProduct />} />
-        <Route path="/products/:id" element={<EditProduct />} />
+        <Route path="/products/edit/:id" element={<EditProduct />} />
       </Routes>
       <Toaster />
     </BrowserRouter>

@@ -1,89 +1,94 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
-import toast from "react-hot-toast";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
 function Register() {
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
+    password: ""
   });
+
   const navigate = useNavigate();
+
   function changeHandler(e) {
     const name = e.target.name;
     const value = e.target.value;
-    setUser({
-      ...user,
-      [name]: value,
-    });
+    setUser({ ...user, [name]: value });
   }
+
   async function submitHandler(e) {
     e.preventDefault();
-    const res = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/sign-up`,
-      user,
-    );
-    console.log(res);
-    setUser({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-    });
-    toast.success("User registered successfully");
-    navigate("/products");
+    try {
+      const res = await axios.post("http://localhost:5000/api/v1/users/sign-up", user);
+      console.log(res.data);
+      toast.success(res.data.msg || "User registered successfully!");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.msg || "Error in registration!");
+    }
   }
+
   return (
-    <div className="container">
-      <h1 className="text-center">Create Account</h1>
-      <Form className="w-1/2 mx-auto" onSubmit={submitHandler}>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+    <div className='container mt-5 w-50 mx-auto'>
+      <h1 className='text-center'>Create Account</h1>
+      <Form onSubmit={submitHandler}>
+        <Form.Group className="mb-3" controlId="formBasicFirstname">
           <Form.Label>First name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="John"
+          <Form.Control 
+            type="text" 
+            placeholder="First name" 
             name="firstName"
-            value={user.firstName}
-            onChange={changeHandler}
+            value={user.firstName} 
+            onChange={changeHandler} 
+            required
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+
+        <Form.Group className="mb-3" controlId="formBasicLastname">
           <Form.Label>Last Name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Doe"
+          <Form.Control 
+            type="text" 
+            placeholder="Last name" 
             name="lastName"
-            value={user.lastName}
-            onChange={changeHandler}
+            value={user.lastName} 
+            onChange={changeHandler} 
+            required
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="johndoe@gmail.com"
+          <Form.Control 
+            type="email" 
+            placeholder="Enter email" 
             name="email"
-            value={user.email}
-            onChange={changeHandler}
+            value={user.email} 
+            onChange={changeHandler} 
+            required
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="*********"
+          <Form.Control 
+            type="password" 
+            placeholder="Password" 
             name="password"
-            value={user.password}
-            onChange={changeHandler}
+            value={user.password} 
+            onChange={changeHandler} 
+            required
           />
         </Form.Group>
-        <p>
-          Already have an account? Please <Link to="/">Login</Link>
-        </p>
-        <Button type="submit" variant="success">
+
+        <p className="mt-2">Already have an account? Please <Link to="/">login</Link></p>
+
+        <Button variant="success" type="submit">
           Register
         </Button>
       </Form>
