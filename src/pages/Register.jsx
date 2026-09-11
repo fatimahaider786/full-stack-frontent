@@ -5,6 +5,8 @@ import Form from 'react-bootstrap/Form';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
+const BACKEND_URL = 'https://full-stack-beckend.vercel.app';
+
 function Register() {
   const [user, setUser] = useState({
     firstName: "",
@@ -24,7 +26,7 @@ function Register() {
   async function submitHandler(e) {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/users/sign-up", user);
+      const res = await axios.post(`${BACKEND_URL}/api/v1/users/sign-up`, user);
       console.log(res.data);
       toast.success(res.data.msg || "User registered successfully!");
       navigate("/");
