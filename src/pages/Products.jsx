@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Card, Button, Spinner } from 'react-bootstrap';
 import toast from 'react-hot-toast';
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+const BACKEND_URL = 'https://full-stack-beckend.vercel.app';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
