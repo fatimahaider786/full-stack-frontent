@@ -1,3 +1,4 @@
+// frontend/src/pages/Login.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
@@ -33,7 +34,7 @@ const Login = () => {
       }
     } catch (err) {
       console.error("Login error:", err);
-      const errorMsg = err.response?.data?.message || "Invalid email or password";
+      const errorMsg = err.response?.data?.msg || "Invalid email or password";
       setError(errorMsg);
       toast.error(errorMsg);
     } finally {
@@ -56,6 +57,7 @@ const Login = () => {
               placeholder="Enter email" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="username"
               required 
             />
           </Form.Group>

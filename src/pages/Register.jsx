@@ -1,3 +1,4 @@
+// frontend/src/pages/Register.jsx
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
@@ -48,6 +49,7 @@ function Register() {
             name="firstName"
             value={user.firstName} 
             onChange={changeHandler} 
+            autoComplete="given-name"
             required
           />
         </Form.Group>
@@ -60,6 +62,7 @@ function Register() {
             name="lastName"
             value={user.lastName} 
             onChange={changeHandler} 
+            autoComplete="family-name"
             required
           />
         </Form.Group>
@@ -72,6 +75,7 @@ function Register() {
             name="email"
             value={user.email} 
             onChange={changeHandler} 
+            autoComplete="username"
             required
           />
         </Form.Group>
@@ -84,6 +88,7 @@ function Register() {
             name="password"
             value={user.password} 
             onChange={changeHandler} 
+            autoComplete="new-password"
             required
           />
         </Form.Group>
