@@ -71,7 +71,8 @@ export default function Products() {
                 {product.image ? (
                   <Card.Img
                     variant="top"
-                    src={`${BACKEND_URL}/uploads/${product.image}`}
+                    // Cloudinary ka URL direct aayega, is liye extra path ki zaroorat nahi
+                    src={product.image.startsWith("http") ? product.image : `${BACKEND_URL}/${product.image}`}
                     style={{ height: "220px", objectFit: "cover" }}
                     onError={(e) => {
                       e.target.onerror = null;
